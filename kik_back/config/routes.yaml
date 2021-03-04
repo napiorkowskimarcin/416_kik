@@ -1,0 +1,4 @@
+handle_game:
+  path: /api/v1/
+  controller: App\Controller\GameStatsController::handleGame
+  methods: [GET, POST]
