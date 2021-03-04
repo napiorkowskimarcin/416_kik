@@ -19,7 +19,20 @@ class GameStatsController extends AbstractController
                 ->getRepository(GameStats::class)
                 ->find($id);
 
-            return $this->json(['gameStats'=>$gameStats->getName()]);
+            return $this->json([
+                'name'=>$gameStats->getName(),
+                'isGame'=>$gameStats->getIsGame(),
+                'a1'=>$gameStats->getA1(),
+                'a2'=>$gameStats->getA2(),
+                'a3'=>$gameStats->getA3(),
+                // 'b1'=>$gameStats->getB1(),
+                // 'b2'=>$gameStats->getB2(),
+                // 'b3'=>$gameStats->getB3(),
+                // 'c1'=>$gameStats->getC1(),
+                // 'c2'=>$gameStats->getC2(),
+                // 'c3'=>$gameStats->getC3(),
+
+            ]);
         }
         else if(isset($request->toArray()['name'])){
             $name = $request->toArray()['name'];

@@ -27,6 +27,21 @@ class GameStats
      */
     private $isGame;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $a1;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $a2;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $a3;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +75,42 @@ class GameStats
     {
         $this->name = $name;
         $this->setIsGame(1);
+        return $this;
+    }
+
+    public function getA1(): ?bool
+    {
+        return $this->a1;
+    }
+
+    public function setA1(?bool $a1): self
+    {
+        $this->a1 = $a1;
+
+        return $this;
+    }
+
+    public function getA2(): ?bool
+    {
+        return $this->a2;
+    }
+
+    public function setA2(?bool $a2): self
+    {
+        $this->a2 = $a2;
+
+        return $this;
+    }
+
+    public function getA3(): ?bool
+    {
+        return $this->a3;
+    }
+
+    public function setA3(?bool $a3): self
+    {
+        $this->a3 = $a3;
+
         return $this;
     }
 }
