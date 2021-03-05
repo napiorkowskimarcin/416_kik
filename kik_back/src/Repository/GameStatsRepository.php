@@ -7,10 +7,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method AmeStats|null find($id, $lockMode = null, $lockVersion = null)
- * @method AmeStats|null findOneBy(array $criteria, array $orderBy = null)
- * @method AmeStats[]    findAll()
- * @method AmeStats[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method GameStats|null find($id, $lockMode = null, $lockVersion = null)
+ * @method GameStats|null findOneBy(array $criteria, array $orderBy = null)
+ * @method GameStats[]    findAll()
+ * @method GameStats[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class GameStatsRepository extends ServiceEntityRepository
 {

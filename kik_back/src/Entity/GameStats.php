@@ -233,6 +233,19 @@ class GameStats
 
         return $this;
     }
-
-    
+    public function getGame(){
+        return [
+            'name'=>$this->getName(),
+            'isGame'=>$this->getIsGame(),
+            'a1'=>$this->getA1(),
+            'a2'=>$this->getA2(),
+            'a3'=>$this->getA3(),
+            'b1'=>$this->getB1(),
+            'b2'=>$this->getB2(),
+            'b3'=>$this->getB3(),
+            'c1'=>$this->getC1(),
+            'c2'=>$this->getC2(),
+            'c3'=>$this->getC3(),
+        ];
+    }
 }

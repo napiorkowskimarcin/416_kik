@@ -52,6 +52,7 @@ export default {
   methods: {
     async clicked(event) {
       console.log(event.target.id);
+      console.log(this.game.id);
       try {
         let response = await this.axios.post("http://localhost:8000/api/v1/", {
           clicked: event.target.id,

@@ -11,30 +11,84 @@ class GameStatsController extends AbstractController
 {
     public function handleGame(Request $request): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
         if(isset($request->toArray()['id'])){
             
             $id = $request->toArray()['id'];
-
-            $gameStats = $this->getDoctrine()
+            $gameStats = $entityManager
                 ->getRepository(GameStats::class)
                 ->find($id);
+                
+            $clicked = $request->toArray()['clicked'];
+            if($clicked ==='a1'){
+                $currentValue = $gameStats->getA1();
+                if($currentValue===NULL){
+                $gameStats->setA1(true);
+                $entityManager->flush();
+                }
+            }
+            if($clicked ==='a2'){
+                $currentValue = $gameStats->getA2();
+                if($currentValue===NULL){
+                $gameStats->setA2(true);
+                $entityManager->flush();
+                }
+            }
+            if($clicked ==='a3'){
+                $currentValue = $gameStats->getA3();
+                if($currentValue===NULL){
+                $gameStats->setA3(true);
+                $entityManager->flush();
+                }
+            }
+            if($clicked ==='b1'){
+                $currentValue = $gameStats->getB1();
+                if($currentValue===NULL){
+                $gameStats->setB1(true);
+                $entityManager->flush();
+                }
+            }
+            if($clicked ==='b2'){
+                $currentValue = $gameStats->getB2();
+                if($currentValue===NULL){
+                $gameStats->setB2(true);
+                $entityManager->flush();
+                }
+            }
+            if($clicked ==='b3'){
+                $currentValue = $gameStats->getB3();
+                if($currentValue===NULL){
+                $gameStats->setB3(true);
+                $entityManager->flush();
+                }
+            }
+            if($clicked ==='c1'){
+                $currentValue = $gameStats->getC1();
+                if($currentValue===NULL){
+                $gameStats->setC1(true);
+                $entityManager->flush();
+                }
+            }
+            if($clicked ==='c2'){
+                $currentValue = $gameStats->getC2();
+                if($currentValue===NULL){
+                $gameStats->setC2(true);
+                $entityManager->flush();
+                }
+            }
+            if($clicked ==='c3'){
+                $currentValue = $gameStats->getC3();
+                if($currentValue===NULL){
+                $gameStats->setC3(true);
+                $entityManager->flush();
+                }
+            }
+            
 
             return $this->json([
-                 $request->toArray()
-                
-                // 'id'=>$id,
-                // 'name'=>$gameStats->getName(),
-                // 'isGame'=>$gameStats->getIsGame(),
-                // 'a1'=>$gameStats->getA1(),
-                // 'a2'=>$gameStats->getA2(),
-                // 'a3'=>$gameStats->getA3(),
-                // 'b1'=>$gameStats->getB1(),
-                // 'b2'=>$gameStats->getB2(),
-                // 'b3'=>$gameStats->getB3(),
-                // 'c1'=>$gameStats->getC1(),
-                // 'c2'=>$gameStats->getC2(),
-                // 'c3'=>$gameStats->getC3(),
-                
+                'message'=>'updated',
+                 'clicked'=>$clicked,
+                 'game'=>$gameStats->getGame(),
             ]);
         }
         else if(isset($request->toArray()['name'])){
@@ -47,5 +101,6 @@ class GameStatsController extends AbstractController
 
         return $this->json(['message'=> 'created' ]);
         }
+        return  $this->json($request->toArray());
     }
 }
