@@ -25,6 +25,14 @@ export default {
   methods: {
     async clicked(event) {
       console.log(event.target.id);
+      try {
+        let response = await this.axios.post("http://localhost:8000/api/v1/", {
+          id: "1",
+        });
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
