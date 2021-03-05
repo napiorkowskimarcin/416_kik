@@ -1,35 +1,63 @@
-<template>
-  <div class="board-main">
-    <div class="board-help">
-      <div class="board-item" id="a1" v-on:click="clicked">1</div>
-      <div class="board-item" id="a2" v-on:click="clicked">2</div>
-      <div class="board-item" id="a3" v-on:click="clicked">3</div>
-    </div>
-    <div class="board-help">
-      <div class="board-item" id="b1" v-on:click="clicked">4</div>
-      <div class="board-item" id="b2" v-on:click="clicked">5</div>
-      <div class="board-item" id="b3" v-on:click="clicked">6</div>
-    </div>
-    <div class="board-help">
-      <div class="board-item" id="c1" v-on:click="clicked">7</div>
-      <div class="board-item" id="c2" v-on:click="clicked">8</div>
-      <div class="board-item" id="c3" v-on:click="clicked">9</div>
+<template
+  ><div>
+    <header>Player name:{{ game.name }}</header>
+    <div class="board-main">
+      <div class="board-help">
+        <div class="board-item" id="a1" v-on:click="clicked">
+          {{ game.a1 }}
+        </div>
+        <div class="board-item" id="a2" v-on:click="clicked">
+          {{ game.a2 }}
+        </div>
+        <div class="board-item" id="a3" v-on:click="clicked">
+          {{ game.a3 }}
+        </div>
+      </div>
+      <div class="board-help">
+        <div class="board-item" id="b1" v-on:click="clicked">
+          {{ game.b1 }}
+        </div>
+        <div class="board-item" id="b2" v-on:click="clicked">
+          {{ game.b2 }}
+        </div>
+        <div class="board-item" id="b3" v-on:click="clicked">
+          {{ game.b3 }}
+        </div>
+      </div>
+      <div class="board-help">
+        <div class="board-item" id="c1" v-on:click="clicked">
+          {{ game.c1 }}
+        </div>
+        <div class="board-item" id="c2" v-on:click="clicked">
+          {{ game.c1 }}
+        </div>
+        <div class="board-item" id="c3" v-on:click="clicked">
+          {{ game.c1 }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
+//import { mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {};
+  },
+  computed: {
+    game() {
+      return this.$store.getters.getCurrentGame;
+    },
   },
   methods: {
     async clicked(event) {
       console.log(event.target.id);
       try {
         let response = await this.axios.post("http://localhost:8000/api/v1/", {
-          id: "1",
+          clicked: event.target.id,
+          id: this.game.id,
         });
-        console.log(response);
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
