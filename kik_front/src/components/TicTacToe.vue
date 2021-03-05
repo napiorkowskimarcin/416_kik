@@ -29,10 +29,10 @@
           {{ game.c1 }}
         </div>
         <div class="board-item" id="c2" v-on:click="clicked">
-          {{ game.c1 }}
+          {{ game.c2 }}
         </div>
         <div class="board-item" id="c3" v-on:click="clicked">
-          {{ game.c1 }}
+          {{ game.c3 }}
         </div>
       </div>
     </div>
@@ -51,14 +51,15 @@ export default {
   },
   methods: {
     async clicked(event) {
-      console.log(event.target.id);
-      console.log(this.game.id);
       try {
         let response = await this.axios.post("http://localhost:8000/api/v1/", {
           clicked: event.target.id,
           id: this.game.id,
         });
-        console.log(response.data);
+
+        console.log();
+        let payload = { value: true, item: response.data.clicked };
+        this.$store.commit("changeGame", payload);
       } catch (error) {
         console.log(error);
       }
