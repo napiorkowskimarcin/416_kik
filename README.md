@@ -11,3 +11,7 @@
   $ cd ..  
   $ cd kik_front  
   $ cd npm run dev
+
+- Notes:
+  compositionAPI vue  
+  symfony move handling of request to services
