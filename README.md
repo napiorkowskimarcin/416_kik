@@ -1,6 +1,7 @@
 ## Hello
 
-- Important - created on php 8.0
+- Important - created on php 8.0 -
+- For now - create first game in db maually.
 
 - Arrange .env to your username and password
 
