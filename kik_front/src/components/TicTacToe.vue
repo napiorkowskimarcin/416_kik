@@ -4,35 +4,35 @@
     <div class="board-main">
       <div class="board-help">
         <div class="board-item" id="a1" v-on:click="clicked">
-          {{ game.a1 }}
+          <p v-if="game.a1 === true">X</p>
         </div>
         <div class="board-item" id="a2" v-on:click="clicked">
-          {{ game.a2 }}
+          <p v-if="game.a2 === true">X</p>
         </div>
         <div class="board-item" id="a3" v-on:click="clicked">
-          {{ game.a3 }}
+          <p v-if="game.a3 === true">X</p>
         </div>
       </div>
       <div class="board-help">
         <div class="board-item" id="b1" v-on:click="clicked">
-          {{ game.b1 }}
+          <p v-if="game.b1 === true">X</p>
         </div>
         <div class="board-item" id="b2" v-on:click="clicked">
-          {{ game.b2 }}
+          <p v-if="game.b2 === true">X</p>
         </div>
         <div class="board-item" id="b3" v-on:click="clicked">
-          {{ game.b3 }}
+          <p v-if="game.b3 === true">X</p>
         </div>
       </div>
       <div class="board-help">
         <div class="board-item" id="c1" v-on:click="clicked">
-          {{ game.c1 }}
+          <p v-if="game.c1 === true">X</p>
         </div>
         <div class="board-item" id="c2" v-on:click="clicked">
-          {{ game.c2 }}
+          <p v-if="game.c2 === true">X</p>
         </div>
         <div class="board-item" id="c3" v-on:click="clicked">
-          {{ game.c3 }}
+          <p v-if="game.c3 === true">X</p>
         </div>
       </div>
     </div>

@@ -1,5 +1,8 @@
 ## Hello
 
+Current state:
+![](gitphoto/202100305-1.PNG)
+
 - Important - created on php 8.0 -
 - For now - create first game in db maually.
 

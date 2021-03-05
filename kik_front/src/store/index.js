@@ -3,7 +3,7 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     game: {
-      id: 3,
+      id: 4,
       name: "marcin",
       isGame: undefined,
       a1: undefined,
