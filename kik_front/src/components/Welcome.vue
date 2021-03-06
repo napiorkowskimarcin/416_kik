@@ -1,6 +1,7 @@
 <template>
   <div>
     <p>Welcome. Put your name please:</p>
+    <p v-if="message !== undefined" class="danger">{{ message }}</p>
     <input type="text" id="input" />
     <div
       id="start"
@@ -22,23 +23,31 @@ export default {
     game() {
       return this.$store.getters.getCurrentGame;
     },
+    message() {
+      return this.$store.getters.getMessage;
+    },
   },
   methods: {
     async startGame() {
       const name = document.getElementById("input").value;
-      console.log({ name });
-      try {
-        let response = await this.axios.post(
-          "http://localhost:8000/api/v1/start",
-          {
-            name: name,
-          }
+      if (name) {
+        try {
+          let response = await this.axios.post(
+            "http://localhost:8000/api/v1/start",
+            {
+              name: name,
+            }
+          );
+          let payload = { name: response.data.name, id: response.data.id };
+          this.$store.commit("startGame", payload);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        this.$store.commit(
+          "addMessage",
+          "name needs to have minimum lenght of one char"
         );
-        console.log(response.data.id);
-        let payload = { name: response.data.name, id: response.data.id };
-        this.$store.commit("startGame", payload);
-      } catch (error) {
-        console.log(error);
       }
     },
   },
@@ -55,5 +64,9 @@ export default {
 }
 .p:hover {
   background-color: rgb(95, 124, 36);
+}
+
+.danger {
+  color: red;
 }
 </style>

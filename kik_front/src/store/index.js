@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
+    message: undefined,
     game: {
       id: undefined,
       name: undefined,
@@ -18,6 +19,9 @@ export default createStore({
     },
   },
   mutations: {
+    addMessage(state, message) {
+      state.message = message;
+    },
     changeGame(state, payload) {
       let value = payload.value;
       let item = payload.item;
@@ -77,5 +81,6 @@ export default createStore({
   modules: {},
   getters: {
     getCurrentGame: (state) => state.game,
+    getMessage: (state) => state.message,
   },
 });
