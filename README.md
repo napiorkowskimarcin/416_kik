@@ -12,7 +12,7 @@ Current state:
   $ cd kik_back  
   $ php bin/console doctrine:migrations:migrate  
   $ symfony serve  
-  $ cd ..  
+  $
   $ cd kik_front  
   $ cd npm run dev
 

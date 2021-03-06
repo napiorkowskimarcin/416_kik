@@ -1,14 +1,28 @@
 <template>
-  <TicTacToe />
+  <div>
+    <div v-if="game.name !== undefined">
+      <TicTacToe />
+    </div>
+    <div v-else>
+      <Welcome />
+    </div>
+  </div>
 </template>
 
 <script>
 import TicTacToe from "./components/TicTacToe.vue";
+import Welcome from "./components/Welcome.vue";
 
 export default {
   name: "App",
   components: {
     TicTacToe,
+    Welcome,
+  },
+  computed: {
+    game() {
+      return this.$store.getters.getCurrentGame;
+    },
   },
 };
 </script>

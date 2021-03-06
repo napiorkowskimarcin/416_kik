@@ -1,3 +1,7 @@
+start_game:
+  path: /api/v1/start
+  controller: App\Controller\GameStatsController::startGame
+  methods: [POST]
 handle_game:
   path: /api/v1/
   controller: App\Controller\GameStatsController::handleGame

@@ -91,16 +91,18 @@ class GameStatsController extends AbstractController
                  'game'=>$gameStats->getGame(),
             ]);
         }
-        else if(isset($request->toArray()['name'])){
-            
-            $name = $request->toArray()['name'];
-            $entityManager = $this->getDoctrine()->getManager();
-            $gameStats = new GameStats($name);
-            $entityManager->persist($gameStats);
-            $entityManager->flush();
-
-        return $this->json(['message'=> 'created' ]);
-        }
         return  $this->json($request->toArray());
     }
+     public function startGame(Request $request): Response{
+        $name = $request->toArray()['name'];
+        $entityManager = $this->getDoctrine()->getManager();
+        $gameStats = new GameStats($name);
+        $entityManager->persist($gameStats);
+        $entityManager->flush();
+            
+        return $this->json([
+            'name'=> $name,
+            'id' =>$gameStats->getId(),
+             ]);
+     }
 }

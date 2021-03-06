@@ -1,6 +1,7 @@
 <template
   ><div>
     <header>Player name:{{ game.name }}</header>
+    <header>Game id:{{ game.id }}</header>
     <div class="board-main">
       <div class="board-help">
         <div class="board-item" id="a1" v-on:click="clicked">

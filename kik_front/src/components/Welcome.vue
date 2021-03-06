@@ -1,0 +1,59 @@
+<template>
+  <div>
+    <p>Welcome. Put your name please:</p>
+    <input type="text" id="input" />
+    <div
+      id="start"
+      type="submit"
+      value="start!"
+      v-on:click="startGame"
+      class="div"
+    >
+      <span class="p">START</span>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {};
+  },
+  computed: {
+    game() {
+      return this.$store.getters.getCurrentGame;
+    },
+  },
+  methods: {
+    async startGame() {
+      const name = document.getElementById("input").value;
+      console.log({ name });
+      try {
+        let response = await this.axios.post(
+          "http://localhost:8000/api/v1/start",
+          {
+            name: name,
+          }
+        );
+        console.log(response.data.id);
+        let payload = { name: response.data.name, id: response.data.id };
+        this.$store.commit("startGame", payload);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+};
+</script>
+<style scoped>
+.p {
+  display: inline-block;
+  color: white;
+  margin: 10px auto;
+  padding: 13px;
+  background-color: yellowgreen;
+  transition: 0.4s;
+}
+.p:hover {
+  background-color: rgb(95, 124, 36);
+}
+</style>
