@@ -29,58 +29,31 @@ export default createStore({
 
       switch (item) {
         case "a1":
-          if (state.game.a1 === undefined) {
-            return (state.game.a1 = value);
-          }
-          state.message = "select other one!";
+          state.game.a1 = value;
           break;
         case "a2":
-          if (state.game.a2 === undefined) {
-            return (state.game.a2 = value);
-          }
-          state.message = "select other one!";
+          state.game.a2 = value;
           break;
         case "a3":
-          if (state.game.a3 === undefined) {
-            return (state.game.a3 = value);
-          }
-          state.message = "select other one!";
+          state.game.a3 = value;
           break;
         case "b1":
-          if (state.game.b1 === undefined) {
-            return (state.game.b1 = value);
-          }
-          state.message = "select other one!";
+          state.game.b1 = value;
           break;
         case "b2":
-          if (state.game.b2 === undefined) {
-            return (state.game.b2 = value);
-          }
-          state.message = "select other one!";
+          state.game.b2 = value;
           break;
         case "b3":
-          if (state.game.b3 === undefined) {
-            return (state.game.b3 = value);
-          }
-          state.message = "select other one!";
+          state.game.b3 = value;
           break;
         case "c1":
-          if (state.game.c1 === undefined) {
-            return (state.game.c1 = value);
-          }
-          state.message = "select other one!";
+          state.game.c1 = value;
           break;
         case "c2":
-          if (state.game.c2 === undefined) {
-            return (state.game.c2 = value);
-          }
-          state.message = "select other one!";
+          state.game.c2 = value;
           break;
         case "c3":
-          if (state.game.c3 === undefined) {
-            state.game.c3 = value;
-          }
-          state.message = "select other one!";
+          state.game.c3 = value;
       }
     },
     startGame(state, payload) {
@@ -92,7 +65,6 @@ export default createStore({
     async playerMove(state, payload) {
       let eventId = payload.eventId;
       let parentId = payload.parentId;
-      console.log(parentId);
       if (parentId) {
         state.commit("addMessage", "select other one!");
         return;
