@@ -21,7 +21,10 @@ export default {
   },
   computed: {
     game() {
-      return this.$store.getters.getCurrentId;
+      return this.$store.getters.getGameStatus;
+    },
+    message() {
+      return this.$store.getters.getMessage;
     },
   },
 };

@@ -6,7 +6,7 @@ export default createStore({
     message: undefined,
     id: undefined,
     name: undefined,
-    isGame: undefined,
+    isGameOver: undefined,
     game: {
       a1: undefined,
       a2: undefined,
@@ -23,6 +23,7 @@ export default createStore({
     startGame(state, payload) {
       state.name = payload.name;
       state.id = payload.id;
+      state.isGameOver = false;
     },
     addMessage(state, message) {
       state.message = message;
@@ -90,9 +91,11 @@ export default createStore({
         switch (value) {
           case true:
             state.message = "Player won";
+            state.isGameOver = true;
             break;
           case false:
             state.message = "Javascript random won";
+            state.isGameOver = true;
             break;
         }
       }
@@ -147,5 +150,6 @@ export default createStore({
     getCurrentName: (state) => state.name,
     getCurrentGame: (state) => state.game,
     getMessage: (state) => state.message,
+    getGameStatus: (state) => state.isGameOver,
   },
 });

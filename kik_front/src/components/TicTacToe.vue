@@ -68,6 +68,9 @@ export default {
     id() {
       return this.$store.getters.getCurrentId;
     },
+    gameStatus() {
+      return this.$store.getters.getGameStatus;
+    },
   },
   methods: {
     async clicked(event) {
