@@ -19,4 +19,4 @@ Current state:
 - Notes:
   compositionAPI vue  
   symfony move handling of request to services
-  move async functions to vuestore
+  create two store: game and info (reduce amount of getters)
