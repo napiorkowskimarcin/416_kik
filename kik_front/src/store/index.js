@@ -95,6 +95,7 @@ export default createStore({
         const response = await axios.post("http://localhost:8000/api/v1/", {
           clicked: eventId,
           id: state.getters.getCurrentId,
+          value: true,
         });
         const payload = { value: true, item: response.data.clicked };
         state.commit("changeGame", payload);
@@ -104,11 +105,23 @@ export default createStore({
     },
     async jsMove(state) {
       const game = state.getters.getCurrentGame;
-      // const result = Object.keys(game).map((key) => [key, game[key]]);
-      const result = Object.entries(game);
-      console.log({ result });
-
-      // const allowedTochoose =
+      const gameArray = Object.entries(game);
+      const allowedTochoose = gameArray.filter(
+        (dataRow) => dataRow[1] === undefined
+      );
+      const randomElement =
+        allowedTochoose[Math.floor(Math.random() * allowedTochoose.length)][0];
+      try {
+        const response = await axios.post("http://localhost:8000/api/v1/", {
+          clicked: randomElement,
+          id: state.getters.getCurrentId,
+          value: false,
+        });
+        const payload = { value: false, item: response.data.clicked };
+        state.commit("changeGame", payload);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   modules: {},

@@ -15,6 +15,8 @@ class GameStatsController extends AbstractController
         if(isset($request->toArray()['id'])){
             
             $id = $request->toArray()['id'];
+            $value = $request->toArray()['value'];
+
             $gameStats = $entityManager
                 ->getRepository(GameStats::class)
                 ->find($id);
@@ -23,63 +25,63 @@ class GameStatsController extends AbstractController
             if($clicked ==='a1'){
                 $currentValue = $gameStats->getA1();
                 if($currentValue===NULL){
-                $gameStats->setA1(true);
+                $gameStats->setA1($value);
                 $entityManager->flush();
                 }
             }
             if($clicked ==='a2'){
                 $currentValue = $gameStats->getA2();
                 if($currentValue===NULL){
-                $gameStats->setA2(true);
+                $gameStats->setA2($value);
                 $entityManager->flush();
                 }
             }
             if($clicked ==='a3'){
                 $currentValue = $gameStats->getA3();
                 if($currentValue===NULL){
-                $gameStats->setA3(true);
+                $gameStats->setA3($value);
                 $entityManager->flush();
                 }
             }
             if($clicked ==='b1'){
                 $currentValue = $gameStats->getB1();
                 if($currentValue===NULL){
-                $gameStats->setB1(true);
+                $gameStats->setB1($value);
                 $entityManager->flush();
                 }
             }
             if($clicked ==='b2'){
                 $currentValue = $gameStats->getB2();
                 if($currentValue===NULL){
-                $gameStats->setB2(true);
+                $gameStats->setB2($value);
                 $entityManager->flush();
                 }
             }
             if($clicked ==='b3'){
                 $currentValue = $gameStats->getB3();
                 if($currentValue===NULL){
-                $gameStats->setB3(true);
+                $gameStats->setB3($value);
                 $entityManager->flush();
                 }
             }
             if($clicked ==='c1'){
                 $currentValue = $gameStats->getC1();
                 if($currentValue===NULL){
-                $gameStats->setC1(true);
+                $gameStats->setC1($value);
                 $entityManager->flush();
                 }
             }
             if($clicked ==='c2'){
                 $currentValue = $gameStats->getC2();
                 if($currentValue===NULL){
-                $gameStats->setC2(true);
+                $gameStats->setC2($value);
                 $entityManager->flush();
                 }
             }
             if($clicked ==='c3'){
                 $currentValue = $gameStats->getC3();
                 if($currentValue===NULL){
-                $gameStats->setC3(true);
+                $gameStats->setC3($value);
                 $entityManager->flush();
                 }
             }
