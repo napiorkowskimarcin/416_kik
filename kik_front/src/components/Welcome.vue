@@ -29,7 +29,6 @@ export default {
   },
   methods: {
     async startGame() {
-      console.log("clicked");
       const name = document.getElementById("input").value;
       await this.$store.dispatch("startGame", name);
     },

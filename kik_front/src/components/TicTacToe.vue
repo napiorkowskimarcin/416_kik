@@ -78,9 +78,9 @@ export default {
             await this.$store.dispatch("jsMove");
             this.$store.commit("checkWin", false);
           }
-          if (this.info.win !== undefined) {
-            await this.$store.dispatch("saveGameResult");
-          }
+        }
+        if (this.info.win !== undefined) {
+          await this.$store.dispatch("saveGameResult");
         }
       }
     },
