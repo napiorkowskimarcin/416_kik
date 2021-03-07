@@ -119,6 +119,27 @@ export default createStore({
     },
   },
   actions: {
+    async startGame(state, name) {
+      if (name.length) {
+        try {
+          const response = await axios.post(
+            "http://localhost:8000/api/v1/start",
+            {
+              name: name,
+            }
+          );
+          const payload = { name: response.data.name, id: response.data.id };
+          state.commit("startGame", payload);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        state.commit(
+          "addMessage",
+          "name needs to have minimum lenght of one char"
+        );
+      }
+    },
     async playerMove(state, payload) {
       const eventId = payload.eventId;
       const parentId = payload.parentId;

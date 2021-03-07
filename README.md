@@ -4,6 +4,7 @@ Current state:
 ![](gitphoto/202100305-1.PNG)
 
 - Important - created on php 8.0
+- Important - no support for IE - used Object entries
 
 - Arrange .env to your username and password
 - create kik database
@@ -19,4 +20,3 @@ Current state:
 - Notes:
   compositionAPI vue  
   symfony move handling of request to services
-  create two store: game and info (reduce amount of getters)

@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>Welcome. Put your name please:</p>
-    <p v-if="message !== undefined" class="danger">{{ message }}</p>
+    <p v-if="info.message !== undefined" class="danger">{{ info.message }}</p>
     <input type="text" id="input" />
     <div
       id="start"
@@ -23,33 +23,15 @@ export default {
     game() {
       return this.$store.getters.getCurrentGame;
     },
-    message() {
-      return this.$store.getters.getMessage;
+    info() {
+      return this.$store.getters.getInfo;
     },
   },
   methods: {
     async startGame() {
+      console.log("clicked");
       const name = document.getElementById("input").value;
-
-      if (name) {
-        try {
-          const response = await this.axios.post(
-            "http://localhost:8000/api/v1/start",
-            {
-              name: name,
-            }
-          );
-          const payload = { name: response.data.name, id: response.data.id };
-          this.$store.commit("startGame", payload);
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        this.$store.commit(
-          "addMessage",
-          "name needs to have minimum lenght of one char"
-        );
-      }
+      await this.$store.dispatch("startGame", name);
     },
   },
 };
