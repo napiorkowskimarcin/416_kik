@@ -30,15 +30,16 @@ export default {
   methods: {
     async startGame() {
       const name = document.getElementById("input").value;
+
       if (name) {
         try {
-          let response = await this.axios.post(
+          const response = await this.axios.post(
             "http://localhost:8000/api/v1/start",
             {
               name: name,
             }
           );
-          let payload = { name: response.data.name, id: response.data.id };
+          const payload = { name: response.data.name, id: response.data.id };
           this.$store.commit("startGame", payload);
         } catch (error) {
           console.log(error);

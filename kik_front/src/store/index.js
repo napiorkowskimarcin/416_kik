@@ -1,12 +1,13 @@
 import { createStore } from "vuex";
+import axios from "axios";
 
 export default createStore({
   state: {
     message: undefined,
+    id: undefined,
+    name: undefined,
+    isGame: undefined,
     game: {
-      id: undefined,
-      name: undefined,
-      isGame: undefined,
       a1: undefined,
       a2: undefined,
       a3: undefined,
@@ -23,63 +24,97 @@ export default createStore({
       state.message = message;
     },
     changeGame(state, payload) {
-      let value = payload.value;
-      let item = payload.item;
+      const value = payload.value;
+      const item = payload.item;
 
-      if (item === "a1") {
-        if (state.game.a1 === undefined) {
-          state.game.a1 = value;
-        }
-      }
-      if (item === "a2") {
-        if (state.game.a2 === undefined) {
-          state.game.a2 = value;
-        }
-      }
-      if (item === "a3") {
-        if (state.game.a3 === undefined) {
-          state.game.a3 = value;
-        }
-      }
-      if (item === "b1") {
-        if (state.game.b1 === undefined) {
-          state.game.b1 = value;
-        }
-      }
-      if (item === "b2") {
-        if (state.game.b2 === undefined) {
-          state.game.b2 = value;
-        }
-      }
-      if (item === "b3") {
-        if (state.game.b3 === undefined) {
-          state.game.b3 = value;
-        }
-      }
-      if (item === "c1") {
-        if (state.game.c1 === undefined) {
-          state.game.c1 = value;
-        }
-      }
-      if (item === "c2") {
-        if (state.game.c2 === undefined) {
-          state.game.c2 = value;
-        }
-      }
-      if (item === "c3") {
-        if (state.game.c3 === undefined) {
-          state.game.c3 = value;
-        }
+      switch (item) {
+        case "a1":
+          if (state.game.a1 === undefined) {
+            return (state.game.a1 = value);
+          }
+          state.message = "select other one!";
+          break;
+        case "a2":
+          if (state.game.a2 === undefined) {
+            return (state.game.a2 = value);
+          }
+          state.message = "select other one!";
+          break;
+        case "a3":
+          if (state.game.a3 === undefined) {
+            return (state.game.a3 = value);
+          }
+          state.message = "select other one!";
+          break;
+        case "b1":
+          if (state.game.b1 === undefined) {
+            return (state.game.b1 = value);
+          }
+          state.message = "select other one!";
+          break;
+        case "b2":
+          if (state.game.b2 === undefined) {
+            return (state.game.b2 = value);
+          }
+          state.message = "select other one!";
+          break;
+        case "b3":
+          if (state.game.b3 === undefined) {
+            return (state.game.b3 = value);
+          }
+          state.message = "select other one!";
+          break;
+        case "c1":
+          if (state.game.c1 === undefined) {
+            return (state.game.c1 = value);
+          }
+          state.message = "select other one!";
+          break;
+        case "c2":
+          if (state.game.c2 === undefined) {
+            return (state.game.c2 = value);
+          }
+          state.message = "select other one!";
+          break;
+        case "c3":
+          if (state.game.c3 === undefined) {
+            return (state.game.c3 = value);
+          }
+          state.message = "select other one!";
+          break;
       }
     },
     startGame(state, payload) {
-      state.game.name = payload.name;
-      state.game.id = payload.id;
+      state.name = payload.name;
+      state.id = payload.id;
     },
   },
-  actions: {},
+  actions: {
+    async playerMove(state, eventId) {
+      try {
+        const response = await axios.post("http://localhost:8000/api/v1/", {
+          clicked: eventId,
+          id: state.getters.getCurrentId,
+        });
+        const payload = { value: true, item: response.data.clicked };
+        state.commit("changeGame", payload);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async jsMove(state) {
+      const game = state.getters.getCurrentGame;
+      // const result = Object.keys(game).map((key) => [key, game[key]]);
+      const result = Object.entries(game);
+      console.log({ result });
+
+      // const allowedTochoose =
+    },
+  },
   modules: {},
   getters: {
+    getCurrentId: (state) => state.id,
+    getCurrentName: (state) => state.name,
     getCurrentGame: (state) => state.game,
     getMessage: (state) => state.message,
   },

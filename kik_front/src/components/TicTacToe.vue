@@ -1,7 +1,8 @@
 <template
   ><div>
-    <header>Player name:{{ game.name }}</header>
-    <header>Game id:{{ game.id }}</header>
+    <header>Player name:{{ name }}</header>
+    <header>Game id:{{ id }}</header>
+    <p v-if="message !== undefined" class="danger">{{ message }}</p>
     <div class="board-main">
       <div class="board-help">
         <div class="board-item" id="a1" v-on:click="clicked">
@@ -49,21 +50,20 @@ export default {
     game() {
       return this.$store.getters.getCurrentGame;
     },
+    message() {
+      return this.$store.getters.getMessage;
+    },
+    name() {
+      return this.$store.getters.getCurrentName;
+    },
+    id() {
+      return this.$store.getters.getCurrentId;
+    },
   },
   methods: {
     async clicked(event) {
-      try {
-        let response = await this.axios.post("http://localhost:8000/api/v1/", {
-          clicked: event.target.id,
-          id: this.game.id,
-        });
-
-        console.log();
-        let payload = { value: true, item: response.data.clicked };
-        this.$store.commit("changeGame", payload);
-      } catch (error) {
-        console.log(error);
-      }
+      await this.$store.dispatch("playerMove", event.target.id);
+      this.$store.dispatch("jsMove");
     },
   },
 };
@@ -88,5 +88,8 @@ export default {
   border: 2px solid black;
   width: 200px;
   height: 200px;
+}
+.danger {
+  color: red;
 }
 </style>
