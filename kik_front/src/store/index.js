@@ -106,6 +106,17 @@ export default createStore({
         }
       }
     },
+    checkIfAbleToContinueTheGame(state) {
+      const game = state.game;
+      const gameArray = Object.entries(game);
+      const allowedTochoose = gameArray.filter(
+        (dataRow) => dataRow[1] === undefined
+      );
+      if (!allowedTochoose.length) {
+        state.info.isGameOver = true;
+        state.info.message = "No one wins - draw";
+      }
+    },
   },
   actions: {
     async playerMove(state, payload) {
@@ -151,8 +162,6 @@ export default createStore({
     },
     async saveGameResult(state) {
       let info = state.getters.getInfo;
-      console.log(info.win);
-
       try {
         await axios.post("http://localhost:8000/api/v1/saveGameResult", {
           result: info.win,
