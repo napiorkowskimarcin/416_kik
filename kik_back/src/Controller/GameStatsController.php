@@ -98,4 +98,19 @@ class GameStatsController extends AbstractController
             'id' =>$gameStats->getId(),
              ]);
      }
+     public function saveGameResult(Request $request): Response{
+        $result = $request->toArray()['result'];
+        $id = $request->toArray()['id'];
+        $entityManager = $this->getDoctrine()->getManager();
+        $gameStats = $entityManager
+                ->getRepository(GameStats::class)
+                ->find($id);
+        $gameStats->setIsWin($result);
+        $entityManager->flush();
+
+        return $this->json([
+            'name'=> $gameStats->getName(),
+            'result' =>$gameStats->getIsWin(),
+        ]);
+     }
 }

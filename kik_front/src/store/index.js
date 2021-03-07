@@ -149,9 +149,18 @@ export default createStore({
         console.log(error);
       }
     },
-    saveGameResult(state) {
+    async saveGameResult(state) {
       let info = state.getters.getInfo;
       console.log(info.win);
+
+      try {
+        await axios.post("http://localhost:8000/api/v1/saveGameResult", {
+          result: info.win,
+          id: state.getters.getCurrentId,
+        });
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   modules: {},

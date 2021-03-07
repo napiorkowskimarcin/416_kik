@@ -6,3 +6,7 @@ handle_game:
   path: /api/v1/
   controller: App\Controller\GameStatsController::handleGame
   methods: [GET, POST]
+save_game_result:
+  path: /api/v1/saveGameResult
+  controller: App\Controller\GameStatsController::saveGameResult
+  methods: [POST]

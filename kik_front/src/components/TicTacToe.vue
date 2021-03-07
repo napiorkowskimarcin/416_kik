@@ -1,8 +1,6 @@
 <template
   ><div>
     <header>Player name:{{ info.name }}</header>
-    <header>Game id:{{ info.id }}</header>
-    <header>Game win:{{ info.win }}</header>
     <p v-if="info.message !== undefined" class="danger">{{ info.message }}</p>
     <div class="board-main">
       <div class="board-help">
