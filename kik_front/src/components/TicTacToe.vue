@@ -64,18 +64,21 @@ export default {
   },
   methods: {
     async clicked(event) {
-      const toSend = {
-        eventId: event.target.id,
-        parentId: event.target.parentNode.id,
-      };
-      await this.$store.dispatch("playerMove", toSend);
-      this.$store.commit("checkWin", true);
-      if (!this.info.message) {
-        await this.$store.dispatch("jsMove");
-        this.$store.commit("checkWin", false);
-      }
-      if (this.info.win !== undefined) {
-        await this.$store.dispatch("saveGameResult");
+      const info = this.$store.getters.getInfo;
+      if (info.win === undefined) {
+        const toSend = {
+          eventId: event.target.id,
+          parentId: event.target.parentNode.id,
+        };
+        await this.$store.dispatch("playerMove", toSend);
+        this.$store.commit("checkWin", true);
+        if (!this.info.message) {
+          await this.$store.dispatch("jsMove");
+          this.$store.commit("checkWin", false);
+        }
+        if (this.info.win !== undefined) {
+          await this.$store.dispatch("saveGameResult");
+        }
       }
     },
   },
