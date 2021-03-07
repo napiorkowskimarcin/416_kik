@@ -76,6 +76,7 @@ export default {
         parentId: event.target.parentNode.id,
       };
       await this.$store.dispatch("playerMove", toSend);
+      this.$store.commit("checkWin", true);
       if (!this.message) {
         await this.$store.dispatch("jsMove");
       }

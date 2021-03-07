@@ -20,6 +20,10 @@ export default createStore({
     },
   },
   mutations: {
+    startGame(state, payload) {
+      state.name = payload.name;
+      state.id = payload.id;
+    },
     addMessage(state, message) {
       state.message = message;
     },
@@ -56,33 +60,49 @@ export default createStore({
           state.game.c3 = value;
       }
     },
-    startGame(state, payload) {
-      state.name = payload.name;
-      state.id = payload.id;
+    checkWin(state, value) {
+      if (
+        (state.game.a1 && state.game.a2 && state.game.a3 === value) ||
+        (state.game.b1 && state.game.b2 && state.game.b3 === value) ||
+        (state.game.c1 && state.game.c2 && state.game.c3 === value) ||
+        (state.game.a1 && state.game.b1 && state.game.c1 === value) ||
+        (state.game.a2 && state.game.b2 && state.game.c2 === value) ||
+        (state.game.a3 && state.game.b3 && state.game.c3 === value) ||
+        (state.game.a1 && state.game.b2 && state.game.c3 === value) ||
+        (state.game.a3 && state.game.b2 && state.game.c1 === value)
+      ) {
+        switch (value) {
+          case true:
+            state.message = "Player won";
+            break;
+          case false:
+            state.message = "Javascript won";
+            break;
+        }
+      }
     },
   },
   actions: {
     async playerMove(state, payload) {
-      let eventId = payload.eventId;
-      let parentId = payload.parentId;
+      const eventId = payload.eventId;
+      const parentId = payload.parentId;
       if (parentId) {
-        state.commit("addMessage", "select other one!");
+        state.commit("addMessage", "select unselected one!");
         return;
-      }
-      const checkedIfAvailable = state.getters.getCurrentGame[eventId];
-      console.log(checkedIfAvailable);
-      try {
-        const response = await axios.post("http://localhost:8000/api/v1/", {
-          clicked: eventId,
-          id: state.getters.getCurrentId,
-          value: true,
-        });
+      } else {
+        try {
+          const response = await axios.post("http://localhost:8000/api/v1/", {
+            clicked: eventId,
+            id: state.getters.getCurrentId,
+            value: true,
+          });
 
-        const payload = { value: true, item: response.data.clicked };
-        state.commit("changeGame", payload);
-        state.commit("addMessage", undefined);
-      } catch (error) {
-        console.log(error);
+          const payload = { value: true, item: response.data.clicked };
+          state.commit("changeGame", payload);
+          state.commit("addMessage", undefined);
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
     async jsMove(state) {
