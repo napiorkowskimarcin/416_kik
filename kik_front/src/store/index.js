@@ -3,10 +3,14 @@ import axios from "axios";
 
 export default createStore({
   state: {
-    message: undefined,
-    id: undefined,
-    name: undefined,
-    isGameOver: undefined,
+    info: {
+      message: undefined,
+      id: undefined,
+      name: undefined,
+      isGameOver: undefined,
+      win: undefined,
+    },
+
     game: {
       a1: undefined,
       a2: undefined,
@@ -21,12 +25,12 @@ export default createStore({
   },
   mutations: {
     startGame(state, payload) {
-      state.name = payload.name;
-      state.id = payload.id;
-      state.isGameOver = false;
+      state.info.name = payload.name;
+      state.info.id = payload.id;
+      state.info.isGameOver = false;
     },
     addMessage(state, message) {
-      state.message = message;
+      state.info.message = message;
     },
     changeGame(state, payload) {
       const value = payload.value;
@@ -90,12 +94,14 @@ export default createStore({
       ) {
         switch (value) {
           case true:
-            state.message = "Player won";
-            state.isGameOver = true;
+            state.info.message = "Player won";
+            state.info.isGameOver = true;
+            state.info.win = true;
             break;
           case false:
-            state.message = "Javascript random won";
-            state.isGameOver = true;
+            state.info.message = "Javascript random won";
+            state.info.isGameOver = true;
+            state.info.win = false;
             break;
         }
       }
@@ -143,13 +149,15 @@ export default createStore({
         console.log(error);
       }
     },
+    saveGameResult(state) {
+      let info = state.getters.getInfo;
+      console.log(info.win);
+    },
   },
   modules: {},
   getters: {
-    getCurrentId: (state) => state.id,
-    getCurrentName: (state) => state.name,
     getCurrentGame: (state) => state.game,
-    getMessage: (state) => state.message,
-    getGameStatus: (state) => state.isGameOver,
+    getCurrentId: (state) => state.info.id,
+    getInfo: (state) => state.info,
   },
 });

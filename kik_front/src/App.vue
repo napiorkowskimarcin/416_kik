@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="game !== undefined">
+    <div v-if="info.isGameOver !== undefined">
       <TicTacToe />
     </div>
     <div v-else>
@@ -20,11 +20,8 @@ export default {
     Welcome,
   },
   computed: {
-    game() {
-      return this.$store.getters.getGameStatus;
-    },
-    message() {
-      return this.$store.getters.getMessage;
+    info() {
+      return this.$store.getters.getInfo;
     },
   },
 };

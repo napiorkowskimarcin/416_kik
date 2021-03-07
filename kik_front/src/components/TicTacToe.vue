@@ -1,8 +1,9 @@
 <template
   ><div>
-    <header>Player name:{{ name }}</header>
-    <header>Game id:{{ id }}</header>
-    <p v-if="message !== undefined" class="danger">{{ message }}</p>
+    <header>Player name:{{ info.name }}</header>
+    <header>Game id:{{ info.id }}</header>
+    <header>Game win:{{ info.win }}</header>
+    <p v-if="info.message !== undefined" class="danger">{{ info.message }}</p>
     <div class="board-main">
       <div class="board-help">
         <div class="board-item" id="a1" v-on:click="clicked">
@@ -59,17 +60,8 @@ export default {
     game() {
       return this.$store.getters.getCurrentGame;
     },
-    message() {
-      return this.$store.getters.getMessage;
-    },
-    name() {
-      return this.$store.getters.getCurrentName;
-    },
-    id() {
-      return this.$store.getters.getCurrentId;
-    },
-    gameStatus() {
-      return this.$store.getters.getGameStatus;
+    info() {
+      return this.$store.getters.getInfo;
     },
   },
   methods: {
@@ -80,9 +72,12 @@ export default {
       };
       await this.$store.dispatch("playerMove", toSend);
       this.$store.commit("checkWin", true);
-      if (!this.message) {
+      if (!this.info.message) {
         await this.$store.dispatch("jsMove");
         this.$store.commit("checkWin", false);
+      }
+      if (this.info.win !== undefined) {
+        await this.$store.dispatch("saveGameResult");
       }
     },
   },
