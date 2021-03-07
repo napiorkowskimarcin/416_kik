@@ -6,43 +6,43 @@
     <div class="board-main">
       <div class="board-help">
         <div class="board-item" id="a1" v-on:click="clicked">
-          <p v-if="game.a1 === true">X</p>
+          <p v-if="game.a1 === true" class="blue">X</p>
           <p v-if="game.a1 === false">O</p>
         </div>
         <div class="board-item" id="a2" v-on:click="clicked">
-          <p v-if="game.a2 === true">X</p>
+          <p v-if="game.a2 === true" class="blue">X</p>
           <p v-if="game.a2 === false">O</p>
         </div>
         <div class="board-item" id="a3" v-on:click="clicked">
-          <p v-if="game.a3 === true">X</p>
+          <p v-if="game.a3 === true" class="blue">X</p>
           <p v-if="game.a3 === false">O</p>
         </div>
       </div>
       <div class="board-help">
         <div class="board-item" id="b1" v-on:click="clicked">
-          <p v-if="game.b1 === true">X</p>
+          <p v-if="game.b1 === true" class="blue">X</p>
           <p v-if="game.b1 === false">O</p>
         </div>
         <div class="board-item" id="b2" v-on:click="clicked">
-          <p v-if="game.b2 === true">X</p>
+          <p v-if="game.b2 === true" class="blue">X</p>
           <p v-if="game.b2 === false">O</p>
         </div>
         <div class="board-item" id="b3" v-on:click="clicked">
-          <p v-if="game.b3 === true">X</p>
+          <p v-if="game.b3 === true" class="blue">X</p>
           <p v-if="game.b3 === false">O</p>
         </div>
       </div>
       <div class="board-help">
         <div class="board-item" id="c1" v-on:click="clicked">
-          <p v-if="game.c1 === true">X</p>
+          <p v-if="game.c1 === true" class="blue">X</p>
           <p v-if="game.c1 === false">O</p>
         </div>
         <div class="board-item" id="c2" v-on:click="clicked">
-          <p v-if="game.c2 === true">X</p>
+          <p v-if="game.c2 === true" class="blue">X</p>
           <p v-if="game.c2 === false">O</p>
         </div>
         <div class="board-item" id="c3" v-on:click="clicked">
-          <p v-if="game.c3 === true">X</p>
+          <p v-if="game.c3 === true" class="blue">X</p>
           <p v-if="game.c3 === false">O</p>
         </div>
       </div>
@@ -71,8 +71,14 @@ export default {
   },
   methods: {
     async clicked(event) {
-      await this.$store.dispatch("playerMove", event.target.id);
-      await this.$store.dispatch("jsMove");
+      const toSend = {
+        eventId: event.target.id,
+        parentId: event.target.parentNode.id,
+      };
+      await this.$store.dispatch("playerMove", toSend);
+      if (!this.message) {
+        await this.$store.dispatch("jsMove");
+      }
     },
   },
 };
@@ -97,8 +103,23 @@ export default {
   border: 2px solid black;
   width: 200px;
   height: 200px;
+  background-color: #eee;
+}
+
+.board-item p {
+  padding-top: 40px;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  height: 156px;
+  font-size: 100px;
+  color: magenta;
+  background-color: rgba(0, 0, 0, 0);
 }
 .danger {
   color: red;
+}
+
+p.blue {
+  color: dodgerblue;
 }
 </style>

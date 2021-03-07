@@ -78,10 +78,9 @@ export default createStore({
           break;
         case "c3":
           if (state.game.c3 === undefined) {
-            return (state.game.c3 = value);
+            state.game.c3 = value;
           }
           state.message = "select other one!";
-          break;
       }
     },
     startGame(state, payload) {
@@ -90,15 +89,26 @@ export default createStore({
     },
   },
   actions: {
-    async playerMove(state, eventId) {
+    async playerMove(state, payload) {
+      let eventId = payload.eventId;
+      let parentId = payload.parentId;
+      console.log(parentId);
+      if (parentId) {
+        state.commit("addMessage", "select other one!");
+        return;
+      }
+      const checkedIfAvailable = state.getters.getCurrentGame[eventId];
+      console.log(checkedIfAvailable);
       try {
         const response = await axios.post("http://localhost:8000/api/v1/", {
           clicked: eventId,
           id: state.getters.getCurrentId,
           value: true,
         });
+
         const payload = { value: true, item: response.data.clicked };
         state.commit("changeGame", payload);
+        state.commit("addMessage", undefined);
       } catch (error) {
         console.log(error);
       }
