@@ -72,13 +72,15 @@ export default {
         };
         await this.$store.dispatch("playerMove", toSend);
         this.$store.commit("checkWin", true);
-        this.$store.commit("checkIfAbleToContinueTheGame");
-        if (!this.info.message) {
-          await this.$store.dispatch("jsMove");
-          this.$store.commit("checkWin", false);
-        }
-        if (this.info.win !== undefined) {
-          await this.$store.dispatch("saveGameResult");
+        if (info.win === undefined) {
+          this.$store.commit("checkIfAbleToContinueTheGame");
+          if (!this.info.message) {
+            await this.$store.dispatch("jsMove");
+            this.$store.commit("checkWin", false);
+          }
+          if (this.info.win !== undefined) {
+            await this.$store.dispatch("saveGameResult");
+          }
         }
       }
     },
