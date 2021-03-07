@@ -62,21 +62,37 @@ export default createStore({
     },
     checkWin(state, value) {
       if (
-        (state.game.a1 && state.game.a2 && state.game.a3 === value) ||
-        (state.game.b1 && state.game.b2 && state.game.b3 === value) ||
-        (state.game.c1 && state.game.c2 && state.game.c3 === value) ||
-        (state.game.a1 && state.game.b1 && state.game.c1 === value) ||
-        (state.game.a2 && state.game.b2 && state.game.c2 === value) ||
-        (state.game.a3 && state.game.b3 && state.game.c3 === value) ||
-        (state.game.a1 && state.game.b2 && state.game.c3 === value) ||
-        (state.game.a3 && state.game.b2 && state.game.c1 === value)
+        (state.game.a1 === value &&
+          state.game.a2 === value &&
+          state.game.a3 === value) ||
+        (state.game.b1 === value &&
+          state.game.b2 === value &&
+          state.game.b3 === value) ||
+        (state.game.c1 === value &&
+          state.game.c2 === value &&
+          state.game.c3 === value) ||
+        (state.game.a1 === value &&
+          state.game.b1 === value &&
+          state.game.c1 === value) ||
+        (state.game.a2 === value &&
+          state.game.b2 === value &&
+          state.game.c2 === value) ||
+        (state.game.a3 === value &&
+          state.game.b3 === value &&
+          state.game.c3 === value) ||
+        (state.game.a1 === value &&
+          state.game.b2 === value &&
+          state.game.c3 === value) ||
+        (state.game.a3 === value &&
+          state.game.b2 === value &&
+          state.game.c1 === value)
       ) {
         switch (value) {
           case true:
             state.message = "Player won";
             break;
           case false:
-            state.message = "Javascript won";
+            state.message = "Javascript random won";
             break;
         }
       }
@@ -96,7 +112,6 @@ export default createStore({
             id: state.getters.getCurrentId,
             value: true,
           });
-
           const payload = { value: true, item: response.data.clicked };
           state.commit("changeGame", payload);
           state.commit("addMessage", undefined);

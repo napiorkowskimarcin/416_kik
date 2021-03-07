@@ -79,6 +79,7 @@ export default {
       this.$store.commit("checkWin", true);
       if (!this.message) {
         await this.$store.dispatch("jsMove");
+        this.$store.commit("checkWin", false);
       }
     },
   },
