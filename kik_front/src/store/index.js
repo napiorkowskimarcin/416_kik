@@ -10,7 +10,6 @@ export default createStore({
       isGameOver: undefined,
       win: undefined,
     },
-
     game: {
       a1: undefined,
       a2: undefined,
