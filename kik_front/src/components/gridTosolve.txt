@@ -1,0 +1,12 @@
+<div v-for="row in rows" :key="row" class="board-help">
+        <div
+          v-for="column in columns"
+          :key="column"
+          class="board-item"
+          v-on:click="clicked"
+        >
+          <p v-if="game.a1 === true" class="blue">X</p>
+          <p v-if="game.a1 === false">O</p>
+          {{ row }}{{ column }}
+        </div>
+      </div>

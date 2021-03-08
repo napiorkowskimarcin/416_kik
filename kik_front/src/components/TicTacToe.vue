@@ -52,7 +52,10 @@
 //import { mapState, mapMutations } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      rows: ["a", "b", "c"],
+      columns: ["1", "2", "3"],
+    };
   },
   computed: {
     game() {
